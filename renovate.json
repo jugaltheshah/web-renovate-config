@@ -1,20 +1,94 @@
 {
-  "extends": [
-    "config:js-app",
-    ":skipStatusChecks"
-  ],
-  "patch": {
-    "automerge": true
+  "web-config": {
+    "extends": [
+        "config:js-app",
+        ":skipStatusChecks"
+      ],
+      "patch": {
+        "automerge": true
+      },
+      "packageRules": [
+        {
+          "packagePatterns": ["^cerebral", "^@cerebral/"],
+          "groupSlug": "cerebral",
+          "groupName": "cerebral monorepo"
+        }
+      ],
+      "timezone": "America/New_York",
+      "commitMessageSuffix": "🤖",
+      "assignees": ["alexruzzarin"],
+      "labels": ["dependencies"]      
   },
-  "packageRules": [
-    {
-      "packagePatterns": ["^cerebral", "^@cerebral/"],
-      "groupSlug": "cerebral",
-      "groupName": "cerebral monorepo"
-    }
-  ],
-  "timezone": "America/New_York",
-  "commitMessageSuffix": "🤖",
-  "assignees": ["alexruzzarin"],
-  "labels": ["dependencies"]
+  "api-stable": {
+    "extends": [
+      "group:all",
+      "config:base",
+      ":semanticCommitTypeAll(chore)",
+      ":preserveSemverRanges"
+    ],
+    "docker": {
+      "enabled": true
+    },
+    "labels": ["chore"],
+    "pinVersions": false,
+    "packageRules": [
+      {
+        "packageNames": [
+          "hapi"
+        ],
+        "allowedVersions": "<17"
+      },
+      {
+        "packageNames": [
+          "hoek", "rejoice", "scooter"
+        ],
+        "allowedVersions": "<5"
+      },
+      {
+        "packageNames": [
+          "h2o2"
+        ],
+        "allowedVersions": "<7"
+      },
+      {
+        "packageNames": [
+          "good"
+        ],
+        "allowedVersions": "<8"
+      },
+      {
+        "packageNames": [
+          "lab"
+        ],
+        "allowedVersions": "<15"
+      },
+      {
+        "packageNames": [
+          "mongoose"
+        ],
+        "allowedVersions": "<5"
+      }
+    ]
+  },
+  "api-dev": {
+    "extends": [
+      "group:all",
+      "config:base",
+      ":semanticCommitTypeAll(chore)",
+      ":preserveSemverRanges"
+    ],
+    "docker": {
+      "enabled": true
+    },
+    "labels": ["chore"],
+    "pinVersions": false,
+    "packageRules": [
+      {
+        "packageNames": [
+          "hapi"
+        ],
+        "allowedVersions": "<18"
+      }
+    ]
+  }  
 }
